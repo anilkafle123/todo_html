@@ -4,7 +4,10 @@
             <header class="header-bar bg-gray-200 text-black rounded-lg p-4 mb-4 shadow">
                 <div class="user-info text-center">
                     <h3 class="text-black">Hello User</h3>
-                    <p>You have <span class="incomplete-tasks text-red-600">5</span> incomplete tasks</p>
+                    <p>You have 
+                        <h1>Incompleted Task: <span class="incomplete-tasks text-red-600 text-xl font-bold">{{ total_completedtask }}</span></h1>
+                        <h1>Completed Task: <span class="incomplete-tasks text-red-600 text-xl font-bold">{{ total_incompletedtask }}</span></h1>
+                    </p>
                 </div>
                 <div class="action-links">
                 </div>
@@ -16,28 +19,31 @@
                 </form>
                 <a id="add-link" href="#" class="text-3xl text-blue-500">+</a>
             </div>
+            {% for data in completedtask %}
             <div class="task-items-wrapper">
                 <div class="task-wrapper completed bg-gray-200 border rounded p-4 mb-4 relative hover:shadow-md transition duration-300">
                     <div class="task-title flex justify-between items-center">
                         <div class="task-complete-icon"></div>
-                        <i><s><a href="#" class="text-green-500">Task 1 - (completed)</a></s></i>
+                        <i><s><a href="{% url 'detail' data.id %}" class="text-green-500"><h1>Completed Task: 
+                            
+                            {{data.title}}
+                            
+                        </h1></a></s></i>
                     </div>
                     <a class="delete-link text-red-500" href="#">×</a>
                 </div>
+                {% endfor %}
+                {% for data in incompletedtask %}
+                
+             
                 <div class="task-wrapper bg-white border rounded p-4 mb-4 relative hover:shadow-md transition duration-300">
                     <div class="task-title flex justify-between items-center">
                         <div class="task-incomplete-icon"></div>
-                        <a href="#" class="text-blue-500">Task 2</a>
+                        <a href="{% url 'detail' data.id %}" class="text-blue-500">{{data.title}}</a>
                     </div>
                     <a class="delete-link text-red-500" href="#">×</a>
                 </div>
-                <div class="task-wrapper bg-white border rounded p-4 mb-4 relative hover:shadow-md transition duration-300">
-                    <div class="task-title flex justify-between items-center">
-                        <div class="task-incomplete-icon"></div>
-                        <a href="#" class="text-blue-500">Task 3</a>
-                    </div>
-                    <a class="delete-link text-red-500" href="#">×</a>
-                </div>
+                {% endfor %}
                 <h3 class="text-gray-500 text-center mt-4">No items in the list</h3>
             </div>
         </div>

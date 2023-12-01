@@ -22,7 +22,7 @@ def LoginView(request):
                 login(request, user)
                 return redirect("home")
             else:
-                error_message = "Invalid Username"
+                error_message = "Username not found"
         else:
             error_message = "Invalid Username or Password"
 
@@ -72,8 +72,17 @@ def Home(request):
     template_name = "dashboard/home.html"
     userprofile = UserProfile.objects.get(user=request.user)
     task = Task.objects.filter(created_by=userprofile)
+    completedtask = Task.objects.filter(created_by=userprofile, completed=True)
+    incompletedtask = Task.objects.filter(created_by=userprofile, completed=False)
+    total_completedtask = completedtask.count()
+    total_incompletedtask = incompletedtask.count()
+
     context = {
-        'task' : task
+        'task' : task,
+        'completedtask' : completedtask,
+        'incompletedtask' : incompletedtask,
+        'total_completedtask' : total_completedtask,
+        'total_incompletedtask' : total_incompletedtask,
     }
     return render(request, template_name, context)
 
