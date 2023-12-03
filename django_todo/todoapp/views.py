@@ -110,3 +110,19 @@ def AddTask(request):
             'form': form
         }
     return render (request,template_name,context)
+
+
+def EditTask(request,pk):
+    template_name = 'dashboard/edittask.html'
+    task = Task.objects.get(id=pk)
+    form = TaskForm(instance=task)
+    if request.method== 'POST':
+        form = TaskForm (request.POST,request.FILES)
+        form.instance.created_by = UserProfile
+        if form.is_valid():                          
+                form.save()
+                return redirect('/')
+    context = {
+            'task': task
+        }
+    return render( request, template_name,context)

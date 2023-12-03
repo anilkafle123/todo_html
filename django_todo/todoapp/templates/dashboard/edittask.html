@@ -1,0 +1,42 @@
+{% extends 'base.html' %}
+{% block content %}
+<div class="container mx-auto max-w-md">
+    <div class="add-task-form bg-white border rounded p-4 mb-4 shadow">
+        <div  class="flex justify-center text-gray-600 text-2xl tracking-tight font-Roboto leading-10 font-bold  sm:text-5xl sm:leading-none md:text-6xl">
+            <span class="border-b-4 border-[#f8373f]">Update Task</span>
+        </div>
+            <form method="POST" class="bg-white p-6 rounded shadow-md">
+                {% csrf_token %}
+                <div class="mb-4">
+                    <label for="title" class="block text-gray-700 text-sm font-bold mb-2">Task Title:</label>
+                    <input type="text" id="title" name="title"
+                        class="w-full px-3 py-2 border rounded-md focus:outline-none focus:border-blue-500"
+                        value="{{task.title}}" required>
+                </div>
+                <div class="mb-4">
+                    <label for="description" class="block text-gray-700 text-sm font-bold mb-2">Task Description:</label>
+                    <textarea id="description" name="description"
+                        class="w-full px-3 py-2 border rounded-md focus:outline-none focus:border-blue-500"
+                        rows="4" required> {{task.description}} </textarea> 
+                        
+                </div>
+                    <input type="date" id="task_date" name="task_date"
+                        class="w-full px-3 py-2 border rounded-md focus:outline-none focus:border-blue-500"
+                        value="{{task.task_date|date:'Y-m-d'}}" required>
+                <div class="mb-4">
+                    <label for="completed" class="flex items-center">
+                        <input type="checkbox" id="completed" name="completed" class="mr-2"
+                            {% if task.completed %} checked {% endif %}>
+                        <span class="text-gray-700 text-sm font-bold">Completed</span>
+                    </label>
+                </div>
+
+                <button type="submit"
+                    class="bg-blue-500 text-white px-4 py-2 rounded-md hover:bg-blue-600 focus:outline-none focus:bg-blue-600">
+                    Update
+                </button>
+            </form>
+    </div>
+</div>
+
+{% endblock content %}

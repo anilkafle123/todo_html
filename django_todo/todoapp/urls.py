@@ -8,6 +8,9 @@ urlpatterns = [
     path('', Home, name="home"),
     path('detail/<str:pk>', TaskDetail, name="detail"),
     path('addtask', AddTask, name="addtask"),
+    path('edittask/<str:pk>', EditTask, name="edittask"),
+
+    
 
 
 ]
