@@ -95,3 +95,18 @@ def TaskDetail(request, pk):
     }
     return render(request, template_name, context)
 
+
+def AddTask(request):
+    template_name= 'dashboard/addtask.html'
+    Userprofile = UserProfile.objects.get(user=request.user)
+    form = TaskForm
+    if request.method== 'POST':
+        form = TaskForm (request.POST,request.FILES)
+        form.instance.created_by = Userprofile
+        if form.is_valid():                          
+                form.save()   
+                return redirect('/')
+    context = {
+            'form': form
+        }
+    return render (request,template_name,context)

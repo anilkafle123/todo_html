@@ -17,7 +17,7 @@
                     <input class="w-full p-2 border rounded" type="text" name='search-area' placeholder="Search tasks">
                     <button type="submit" class="bg-blue-500 text-white px-4 py-2 rounded cursor-pointer">Search</button>
                 </form>
-                <a id="add-link" href="#" class="text-3xl text-blue-500">+</a>
+                <a id="add-link" href="{% url 'addtask' %}" class="text-3xl text-blue-500">+</a>
             </div>
             {% for data in completedtask %}
             <div class="task-items-wrapper">
